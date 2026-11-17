@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#09090d">
+  <meta name="description" content="Império dos E-Books — conhecimento, inspiração e leitura em um só lugar.">
+  <title>Império dos E-Books | Seu universo de leitura</title>
+  <style>
+    :root {
+      --bg: #09090d;
+      --panel: #12121a;
+      --panel-2: #191522;
+      --green: #21d18b;
+      --purple: #8b5cf6;
+      --gold: #d9b45b;
+      --text: #f7f3ff;
+      --muted: #aaa3b8;
+      --line: rgba(217,180,91,.22);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; color: var(--text);
+      background: radial-gradient(ellipse at 15% 0%, rgba(139,92,246,.16), transparent 35%),
+                  radial-gradient(ellipse at 90% 15%, rgba(33,209,139,.10), transparent 30%), var(--bg);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif;
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(1160px, calc(100% - 40px)); margin: auto; }
+    header {
+      position: sticky; top: 0; z-index: 10; backdrop-filter: blur(16px);
+      background: rgba(9,9,13,.84); border-bottom: 1px solid rgba(255,255,255,.07);
+    }
+    .nav { min-height: 76px; display:flex; align-items:center; justify-content:space-between; gap:20px; }
+    .brand { display:flex; align-items:center; gap:12px; font-weight:850; letter-spacing:-.5px; }
+    .brand-mark {
+      width:42px; height:42px; display:grid; place-items:center; border-radius:13px;
+      color:#100e12; font-size:22px; background:linear-gradient(135deg,var(--gold),#f5e2a3);
+      box-shadow:0 0 25px rgba(217,180,91,.22);
+    }
+    .brand span strong { color:var(--gold); }
+    nav { display:flex; gap:25px; color:var(--muted); font-size:14px; }
+    nav a:hover, .contact-link:hover { color:var(--green); }
+    .contact-link { color:var(--gold); font-size:14px; font-weight:700; }
+    .hero { padding:86px 0 66px; display:grid; grid-template-columns:1.2fr .8fr; gap:50px; align-items:center; }
+    .eyebrow { color:var(--green); text-transform:uppercase; letter-spacing:2.5px; font-size:11px; font-weight:800; }
+    h1 { font-size:clamp(42px,6vw,72px); line-height:1.02; letter-spacing:-3px; margin:16px 0 20px; }
+    h1 em { font-style:normal; color:var(--gold); }
+    .hero p { color:var(--muted); line-height:1.8; max-width:570px; font-size:16px; }
+    .actions { display:flex; gap:13px; flex-wrap:wrap; margin-top:30px; }
+    .btn { display:inline-flex; justify-content:center; align-items:center; padding:14px 21px; border-radius:12px; font-weight:800; font-size:14px; transition:.2s; }
+    .btn:hover { transform:translateY(-2px); }
+    .primary { color:#07120e; background:linear-gradient(120deg,var(--green),#8af0c7); }
+    .secondary { border:1px solid var(--line); color:var(--gold); background:rgba(217,180,91,.06); }
+    .showcase {
+      min-height:340px; border:1px solid var(--line); border-radius:28px; padding:28px;
+      background:linear-gradient(145deg,rgba(139,92,246,.18),rgba(18,18,26,.92) 55%,rgba(33,209,139,.10));
+      display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden;
+    }
+    .showcase:before,.showcase:after { content:""; position:absolute; border:1px solid rgba(217,180,91,.2); border-radius:50%; width:260px;height:260px; }
+    .showcase:after { width:330px;height:330px; }
+    .book-stack { position:relative; z-index:1; display:flex; align-items:center; gap:10px; transform:rotate(-7deg); }
+    .book {
+      width:112px; height:174px; border-radius:7px 13px 13px 7px; padding:15px 12px;
+      display:flex; flex-direction:column; justify-content:space-between; box-shadow:12px 18px 30px #0008;
+      border-left:5px solid rgba(255,255,255,.18); font-size:10px; font-weight:900; letter-spacing:1px;
+    }
+    .book b { font-size:23px; line-height:1; }
+    .b1 { background:linear-gradient(150deg,#3a236b,#8b5cf6); transform:translateY(13px) rotate(-8deg); }
+    .b2 { background:linear-gradient(150deg,#07543e,#21d18b); transform:translateY(-8px); color:#06150f; }
+    .b3 { background:linear-gradient(150deg,#80601f,#d9b45b); color:#191206; transform:translateY(17px) rotate(8deg); }
+    section { padding:55px 0; }
+    .section-head { display:flex; justify-content:space-between; align-items:end; gap:20px; margin-bottom:25px; }
+    h2 { margin:8px 0 0; font-size:clamp(27px,4vw,38px); letter-spacing:-1.2px; }
+    .section-head p { color:var(--muted); margin:0; font-size:14px; }
+    .toolbar { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:22px; }
+    input, select {
+      color:var(--text); background:var(--panel); border:1px solid rgba(255,255,255,.12);
+      border-radius:11px; padding:13px 15px; outline:none; font:inherit;
+    }
+    input { flex:1; min-width:220px; }
+    select { min-width:170px; }
+    input:focus,select:focus { border-color:var(--green); }
+    .catalog { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+    .card {
+      background:linear-gradient(160deg,var(--panel-2),var(--panel)); border:1px solid rgba(255,255,255,.08);
+      border-radius:18px; padding:17px; transition:.22s;
+    }
+    .card:hover { transform:translateY(-5px); border-color:var(--line); box-shadow:0 18px 45px #0005; }
+    .cover { height:165px; border-radius:12px; display:flex; flex-direction:column; justify-content:space-between; padding:17px; overflow:hidden; }
+    .cover small { letter-spacing:2px; font-size:9px; font-weight:900; opacity:.8; }
+    .cover strong { font-size:25px; line-height:1.05; max-width:190px; }
+    .purple { background:linear-gradient(140deg,#27134b,#8b5cf6); }
+    .green { background:linear-gradient(140deg,#063c2d,#21a875); }
+    .gold { background:linear-gradient(140deg,#5a4218,#d9b45b); color:#1b1508; }
+    .dark { background:linear-gradient(140deg,#252532,#55556b); }
+    .card-info { padding:15px 2px 2px; }
+    .tag { color:var(--green); font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:1px; }
+    .card h3 { margin:7px 0; font-size:17px; }
+    .card p { color:var(--muted); font-size:13px; line-height:1.6; min-height:42px; margin:0 0 14px; }
+    .card-bottom { display:flex; justify-content:space-between; align-items:center; gap:10px; }
+    .price { color:var(--gold); font-weight:900; font-size:14px; }
+    .small-btn { border:1px solid rgba(33,209,139,.35); color:var(--green); padding:9px 12px; border-radius:9px; font-size:12px; font-weight:800; }
+    .empty { display:none; color:var(--muted); text-align:center; padding:35px; border:1px dashed var(--line); border-radius:15px; }
+    .about {
+      display:grid; grid-template-columns:1fr 1fr; gap:35px; align-items:center;
+      background:linear-gradient(120deg,rgba(139,92,246,.12),rgba(33,209,139,.06));
+      border:1px solid rgba(255,255,255,.07); border-radius:24px; padding:35px;
+    }
+    .about p { color:var(--muted); line-height:1.8; }
+    .stats { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; }
+    .stat { background:rgba(9,9,13,.55); border:1px solid var(--line); border-radius:14px; padding:20px; }
+    .stat strong { display:block; color:var(--gold); font-size:24px; }
+    .stat span { color:var(--muted); font-size:12px; }
+    .contact {
+      text-align:center; padding:42px 24px; border-radius:24px;
+      background:linear-gradient(120deg,rgba(33,209,139,.12),rgba(139,92,246,.16));
+      border:1px solid var(--line);
+    }
+    .contact p { color:var(--muted); line-height:1.7; }
+    .email { color:var(--gold); font-weight:800; overflow-wrap:anywhere; }
+    footer { border-top:1px solid rgba(255,255,255,.08); padding:25px 0; color:var(--muted); font-size:12px; }
+    .foot { display:flex; justify-content:space-between; gap:15px; flex-wrap:wrap; }
+    @media(max-width:800px) {
+      nav { display:none; }
+      .hero { grid-template-columns:1fr; padding-top:60px; }
+      .showcase { min-height:280px; }
+      .catalog { grid-template-columns:repeat(2,1fr); }
+      .about { grid-template-columns:1fr; }
+    }
+    @media(max-width:540px) {
+      .wrap { width:min(100% - 28px,1160px); }
+      .catalog { grid-template-columns:1fr; }
+      .section-head { display:block; }
+      .section-head p { margin-top:8px; }
+      h1 { letter-spacing:-2px; }
+      .about { padding:23px; }
+      .book { width:90px; height:145px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap nav">
+      <a class="brand" href="#inicio" aria-label="Império dos E-Books - início">
+        <span class="brand-mark">♛</span>
+        <span>Império dos <strong>E-Books</strong></span>
+      </a>
+      <nav aria-label="Navegação principal">
+        <a href="#catalogo">Catálogo</a><a href="#sobre">Sobre nós</a><a href="#contato">Contato</a>
+      </nav>
+      <a class="contact-link" href="mailto:netoelizeu871@gmail.com">Fale conosco ↗</a>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <section class="hero" id="inicio">
+        <div>
+          <div class="eyebrow">Conhecimento que transforma</div>
+          <h1>Seu próximo capítulo começa no <em>Império.</em></h1>
+          <p>Explore um universo de e-books para aprender, evoluir e descobrir novas ideias. Escolha seu próximo conhecimento e leve a leitura com você.</p>
+          <div class="actions">
+            <a class="btn primary" href="#catalogo">Explorar catálogo</a>
+            <a class="btn secondary" href="#contato">Entre em contato</a>
+          </div>
+        </div>
+        <div class="showcase" aria-label="Ilustração decorativa de três livros digitais">
+          <div class="book-stack">
+            <div class="book b1"><small>IMPÉRIO • LEITURA</small><b>MENTE<br>CRIATIVA</b><small>EDIÇÃO DIGITAL</small></div>
+            <div class="book b2"><small>IMPÉRIO • SABER</small><b>FOCO &<br>SUCESSO</b><small>EDIÇÃO DIGITAL</small></div>
+            <div class="book b3"><small>IMPÉRIO • IDEIAS</small><b>OURO DO<br>CONHECIMENTO</b><small>EDIÇÃO DIGITAL</small></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="catalogo">
+        <div class="section-head">
+          <div><div class="eyebrow">Escolha sua próxima leitura</div><h2>Catálogo de e-books</h2></div>
+          <p>Modelos demonstrativos — personalize com seus títulos.</p>
+        </div>
+        <div class="toolbar">
+          <input id="search" type="search" placeholder="Buscar e-book..." aria-label="Buscar e-book">
+          <select id="category" aria-label="Filtrar por categoria">
+            <option value="todos">Todas as categorias</option>
+            <option value="desenvolvimento">Desenvolvimento pessoal</option>
+            <option value="negocios">Negócios</option>
+            <option value="estudos">Estudos</option>
+          </select>
+        </div>
+        <div class="catalog" id="catalog">
+          <article class="card" data-category="desenvolvimento" data-title="Hábitos que Transformam">
+            <div class="cover purple"><small>IMPÉRIO DOS E-BOOKS</small><strong>HÁBITOS QUE<br>TRANSFORMAM</strong><small>DESENVOLVIMENTO PESSOAL</small></div>
+            <div class="card-info"><span class="tag">Desenvolvimento pessoal</span><h3>Hábitos que Transformam</h3><p>Uma leitura para inspirar pequenas mudanças e grandes resultados.</p><div class="card-bottom"><span class="price">Consulte o preço</span><a class="small-btn" href="mailto:netoelizeu871@gmail.com?subject=Tenho%20interesse%20em%20um%20e-book">Tenho interesse</a></div></div>
+          </article>
+          <article class="card" data-category="negocios" data-title="Mentalidade Empreendedora">
+            <div class="cover green"><small>IMPÉRIO DOS E-BOOKS</small><strong>MENTALIDADE<br>EMPREENDEDORA</strong><small>NEGÓCIOS</small></div>
+            <div class="card-info"><span class="tag">Negócios</span><h3>Mentalidade Empreendedora</h3><p>Ideias e princípios para tirar projetos do papel e seguir em frente.</p><div class="card-bottom"><span class="price">Consulte o preço</span><a class="small-btn" href="mailto:netoelizeu871@gmail.com?subject=Tenho%20interesse%20em%20um%20e-book">Tenho interesse</a></div></div>
+          </article>
+          <article class="card" data-category="estudos" data-title="Aprenda com Estratégia">
+            <div class="cover gold"><small>IMPÉRIO DOS E-BOOKS</small><strong>APRENDA COM<br>ESTRATÉGIA</strong><small>ESTUDOS</small></div>
+            <div class="card-info"><span class="tag">Estudos</span><h3>Aprenda com Estratégia</h3><p>Dicas para organizar sua rotina e aproveitar melhor o tempo de estudo.</p><div class="card-bottom"><span class="price">Consulte o preço</span><a class="small-btn" href="mailto:netoelizeu871@gmail.com?subject=Tenho%20interesse%20em%20um%20e-book">Tenho interesse</a></div></div>
+          </article>
+          <article class="card" data-category="desenvolvimento" data-title="Disciplina e Foco">
+            <div class="cover dark"><small>IMPÉRIO DOS E-BOOKS</small><strong>DISCIPLINA<br>& FOCO</strong><small>DESENVOLVIMENTO PESSOAL</small></div>
+            <div class="card-info"><span class="tag">Desenvolvimento pessoal</span><h3>Disciplina e Foco</h3><p>Um convite para definir prioridades e avançar com consistência.</p><div class="card-bottom"><span class="price">Consulte o preço</span><a class="small-btn" href="mailto:netoelizeu871@gmail.com?subject=Tenho%20interesse%20em%20um%20e-book">Tenho interesse</a></div></div>
+          </article>
+          <article class="card" data-category="negocios" data-title="Finanças sem Complicação">
+            <div class="cover purple"><small>IMPÉRIO DOS E-BOOKS</small><strong>FINANÇAS SEM<br>COMPLICAÇÃO</strong><small>NEGÓCIOS</small></div>
+            <div class="card-info"><span class="tag">Negócios</span><h3>Finanças sem Complicação</h3><p>Conceitos básicos para cuidar melhor do seu planejamento financeiro.</p><div class="card-bottom"><span class="price">Consulte o preço</span><a class="small-btn" href="mailto:netoelizeu871@gmail.com?subject=Tenho%20interesse%20em%20um%20e-book">Tenho interesse</a></div></div>
+          </article>
+          <article class="card" data-category="estudos" data-title="Conhecimento em Prática">
+            <div class="cover green"><small>IMPÉRIO DOS E-BOOKS</small><strong>CONHECIMENTO<br>EM PRÁTICA</strong><small>ESTUDOS</small></div>
+            <div class="card-info"><span class="tag">Estudos</span><h3>Conhecimento em Prática</h3><p>Transforme o que você aprende em ações úteis no dia a dia.</p><div class="card-bottom"><span class="price">Consulte o preço</span><a class="small-btn" href="mailto:netoelizeu871@gmail.com?subject=Tenho%20interesse%20em%20um%20e-book">Tenho interesse</a></div></div>
+          </article>
+        </div>
+        <div class="empty" id="empty">Nenhum e-book encontrado. Tente outra busca ou categoria.</div>
+      </section>
+
+      <section id="sobre">
+        <div class="about">
+          <div><div class="eyebrow">Muito além de páginas</div><h2>Conhecimento ao seu alcance.</h2><p>O Império dos E-Books é um espaço para reunir leituras digitais, compartilhar conhecimento e facilitar sua próxima descoberta. Navegue pelo catálogo e fale conosco para tirar dúvidas, consultar valores ou sugerir novos títulos.</p><a class="btn secondary" href="mailto:netoelizeu871@gmail.com">Enviar uma mensagem</a></div>
+          <div class="stats">
+            <div class="stat"><strong>100%</strong><span>Experiência digital</span></div>
+            <div class="stat"><strong>24/7</strong><span>Catálogo disponível online</span></div>
+            <div class="stat"><strong>+ Ideias</strong><span>Para aprender e evoluir</span></div>
+            <div class="stat"><strong>Você</strong><span>No centro da experiência</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contato">
+        <div class="contact">
+          <div class="eyebrow">Estamos à disposição</div>
+          <h2>Dúvidas? Fale com o Império.</h2>
+          <p>Se tiver alguma dúvida, procure nossa equipe pelo e-mail abaixo.<br>Depois da sua experiência, sua avaliação também será muito bem-vinda!</p>
+          <p><a class="email" href="mailto:netoelizeu871@gmail.com?subject=Contato%20-%20Imp%C3%A9rio%20dos%20E-Books">netoelizeu871@gmail.com</a></p>
+          <a class="btn primary" href="mailto:netoelizeu871@gmail.com?subject=Contato%20-%20Imp%C3%A9rio%20dos%20E-Books">Enviar e-mail</a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer><div class="wrap foot"><span>© <span id="year"></span> Império dos E-Books. Todos os direitos reservados.</span><span>Preto • Verde • Roxo • Dourado</span></div></footer>
+  <script>
+    const search = document.getElementById('search');
+    const category = document.getElementById('category');
+    const cards = [...document.querySelectorAll('.card')];
+    const empty = document.getElementById('empty');
+    function filterCatalog() {
+      const term = search.value.trim().toLocaleLowerCase('pt-BR');
+      const chosen = category.value;
+      let visible = 0;
+      cards.forEach(card => {
+        const matchesText = card.dataset.title.toLocaleLowerCase('pt-BR').includes(term);
+        const matchesCategory = chosen === 'todos' || card.dataset.category === chosen;
+        card.hidden = !(matchesText && matchesCategory);
+        if (!card.hidden) visible++;
+      });
+      empty.style.display = visible ? 'none' : 'block';
+    }
+    search.addEventListener('input', filterCatalog);
+    category.addEventListener('change', filterCatalog);
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
